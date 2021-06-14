@@ -5,22 +5,23 @@ const TaskContainer = () => {
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState('');
 
+  //[{ singleTask: "walk the dog" }, { singleTask: "laundry" }]
 
   const changeHandler = (e) => {
     e.preventDefault();
     setTask(e.target.value);
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(task.length) {
-      let newTaskList = [...tasks, task]
+    if (task.length) {
+      let newTaskList = [...tasks, { singleTask: task }];
       setTasks(newTaskList);
-      setTask("");
+      setTask('');
     }
-  }
+  };
 
-  console.log("TASKS", tasks)
+  console.log('TASKS', tasks);
   return (
     <div className='container'>
       <h1>To Do List</h1>
@@ -34,10 +35,12 @@ const TaskContainer = () => {
             onChange={changeHandler}
             value={task}
           />
-          <button className='button' type='submit'>Add</button>
+          <button className='button' type='submit'>
+            Add
+          </button>
         </form>
       </div>
-      <TaskList tasks={tasks} />
+      <TaskList setTasks={setTasks} tasks={tasks} />
     </div>
   );
 };
